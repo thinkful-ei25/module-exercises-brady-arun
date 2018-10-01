@@ -26,11 +26,17 @@ const store = (function() {
     }
   }
 
+  function findAndToggleChecked(id) {
+    const item = this.findById(id);
+    item.checked = !item.checked;
+  }
+
   return {
     items,
     hideCheckedItems,
     searchTerm,
     findById,
-    addItem
+    addItem,
+    findAndToggleChecked
   };
 })();
