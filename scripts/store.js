@@ -31,12 +31,29 @@ const store = (function() {
     item.checked = !item.checked;
   }
 
+  function findAndUpdateName(id, newName) {
+    try {
+      Item.validateName(newName);
+      this.findById(id).name = newName;
+    } catch (error) {
+      console.error(`Cannot update name: ${error.message}`);
+    }
+  }
+
+  function findAndDelete(id) {
+    const itemToDelete = this.findById(id);
+    this.items = this.items.filter(item => item !== itemToDelete);
+  }
+
   return {
     items,
     hideCheckedItems,
     searchTerm,
     findById,
     addItem,
-    findAndToggleChecked
+    findAndToggleChecked,
+    findAndUpdateName,
+    findAndDelete
+
   };
 })();
